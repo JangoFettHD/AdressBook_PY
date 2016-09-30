@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import json
+import time,sys
 
 # initialize
 print("------Справочник 0.01a------")
@@ -100,7 +101,7 @@ def add():
 def removeJson(index):
     global db
     init()
-    print(db["contact"])
+    #print(db["contact"])
     db["contact"].pop(index - 1)
 
     f = open(db_directory, "r+")
@@ -110,15 +111,15 @@ def removeJson(index):
     str_dct = temp.replace("\'", "\"")
     f.write(str_dct)
     f.close()
-    print(db["contact"])
+    #print(db["contact"])
 
 
 def editJson(index, element):
     global db
     init()
-    print(db["contact"])
+    #print(db["contact"])
 
-    print("EDIT")
+    #print("EDIT")
 
     print("===Введите новое значение===")
     if (element < 6):
@@ -163,11 +164,11 @@ def editJson(index, element):
     str_dct = temp.replace("\'", "\"")
     f.write(str_dct)
     f.close()
-    print(db["contact"])
+    #print(db["contact"])
 
 
 '''
-def remove(line_index):
+def remove(line_index=0):
     lines = []
     with open(db_directory, "r") as f:
         lines = f.readlines()
@@ -241,7 +242,7 @@ def search(s):
 
 
 def info():
-    print("===Что вы хотите сделать?===")
+    print('\033[92m'+"===Что вы хотите сделать?==="+ '\033[0m')
     txt1 = "1-добавить запись"
     txt2 = "2-показать справочник"
     txt3 = "3-удалить запись"
@@ -297,6 +298,11 @@ def clear():
 
 
 # programm
+for i in range(100+1):
+    time.sleep(0.1)
+    sys.stdout.write(('='*i)+(''*(100-i))+("\r          [ %d"%i+"% ]          "))
+    sys.stdout.flush()
+print("")
 init()
 info()
 i = -1
